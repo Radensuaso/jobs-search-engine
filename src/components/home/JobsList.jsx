@@ -18,17 +18,21 @@ const JobsList = (props) => {
       </thead>
       <tbody>
         {jobs.map((job, i) => (
-          <tr>
+          <tr key={job.id}>
             <th>{i + 1}</th>
-            <Link to={`/Detail/${job.id}`} target="_blank">
-              <th>{job.title}</th>
-            </Link>
+            <th>
+              <Link to={`/Detail/${job.id}`} target="_blank">
+                {job.title}
+              </Link>
+            </th>
             <th>{job.job_type}</th>
             <th>{job.company_name}</th>
             <th>{job.category}</th>
-            <a href={job.url} rel="noreferrer" target="_blank">
-              <th>{job.url}</th>
-            </a>
+            <th>
+              <a href={job.url} rel="noreferrer" target="_blank">
+                {job.url}
+              </a>
+            </th>
             <th>{job.publication_date}</th>
           </tr>
         ))}
