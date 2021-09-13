@@ -8,7 +8,9 @@ import {
   Container,
 } from "react-bootstrap";
 
-const NavbarTop = () => {
+const NavbarTop = (props) => {
+  const { query, setQuery, getSearchedJobsHandler } = props;
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -18,14 +20,18 @@ const NavbarTop = () => {
           <Nav className="mr-auto my-2 my-lg-0" navbarScroll>
             <Nav.Link href="#action1">Home</Nav.Link>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={getSearchedJobsHandler}>
             <FormControl
               type="search"
               placeholder="Search"
               className="mr-2"
               aria-label="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
-            <Button variant="outline-success">Search</Button>
+            <Button type="submit" variant="outline-success">
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>

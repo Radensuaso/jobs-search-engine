@@ -1,8 +1,9 @@
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Loading from "../helpers/Loading";
 
 const JobsList = (props) => {
-  const { jobs = [] } = props;
+  const { jobs = [], loading } = props;
   return (
     <Table striped bordered hover>
       <thead>
@@ -17,25 +18,29 @@ const JobsList = (props) => {
         </tr>
       </thead>
       <tbody>
-        {jobs.map((job, i) => (
-          <tr key={job.id}>
-            <th>{i + 1}</th>
-            <th>
-              <Link to={`/Detail/${job.id}`} target="_blank">
-                {job.title}
-              </Link>
-            </th>
-            <th>{job.job_type}</th>
-            <th>{job.company_name}</th>
-            <th>{job.category}</th>
-            <th>
-              <a href={job.url} rel="noreferrer" target="_blank">
-                {job.url}
-              </a>
-            </th>
-            <th>{job.publication_date}</th>
-          </tr>
-        ))}
+        {loading ? (
+          <Loading />
+        ) : (
+          jobs.map((job, i) => (
+            <tr key={job.id}>
+              <th>{i + 1}</th>
+              <th>
+                <Link to={`/Detail/${job.id}`} target="_blank">
+                  {job.title}
+                </Link>
+              </th>
+              <th>{job.job_type}</th>
+              <th>{job.company_name}</th>
+              <th>{job.category}</th>
+              <th>
+                <a href={job.url} rel="noreferrer" target="_blank">
+                  {job.url}
+                </a>
+              </th>
+              <th>{job.publication_date}</th>
+            </tr>
+          ))
+        )}
       </tbody>
     </Table>
 
