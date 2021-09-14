@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getJobs, getSearchedJobs } from "./tools/axiosTools.js";
+import { getJobs } from "./tools/axiosTools.js";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavbarTop from "./components/navsAndFooters/NavbarTop";
@@ -9,19 +9,23 @@ import Detail from "./views/Detail";
 
 function App() {
   const [query, setQuery] = useState("");
-  const [data, setData] = useState(null);
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getSearchedJobsHandler = (e) => {
+  const getSearchedJobs = (e) => {
     e.preventDefault();
     setLoading(true);
-    setData((query) => getSearchedJobs(query));
-    setLoading(false);
+    getJobs(query)
+      .then((j) => setJobs(j.data))
+      .then(() => setLoading(false))
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    setData(getJobs);
-    setLoading(false);
+    getJobs("")
+      .then((j) => setJobs(j.data))
+      .then(() => setLoading(false))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
@@ -30,13 +34,13 @@ function App() {
         <NavbarTop
           query={query}
           setQuery={setQuery}
-          getSearchedJobsHandler={getSearchedJobsHandler}
+          getSearchedJobs={getSearchedJobs}
         />
         <Route
           path="/"
           exact
           render={(routerProps) => (
-            <Home {...routerProps} data={data} loading={loading} />
+            <Home {...routerProps} jobs={jobs} loading={loading} />
           )}
         />
         <Route

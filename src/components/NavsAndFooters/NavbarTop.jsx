@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 
 const NavbarTop = (props) => {
-  const { query, setQuery, getSearchedJobsHandler } = props;
+  const { query, setQuery, getSearchedJobs } = props;
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -20,7 +20,7 @@ const NavbarTop = (props) => {
           <Nav className="mr-auto my-2 my-lg-0" navbarScroll>
             <Nav.Link href="#action1">Home</Nav.Link>
           </Nav>
-          <Form className="d-flex" onSubmit={getSearchedJobsHandler}>
+          <Form className="d-flex" onSubmit={(e) => getSearchedJobs(e)}>
             <FormControl
               type="search"
               placeholder="Search"
