@@ -8,10 +8,9 @@ import {
   Container,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { BsStarFill } from "react-icons/bs";
 
-const NavbarTop = (props) => {
-  const { query, setQuery, getSearchedJobs } = props;
-
+const NavbarTop = ({ query, setQuery, getSearchedJobs }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -22,20 +21,24 @@ const NavbarTop = (props) => {
             <Link to="/" className="nav-link">
               Home
             </Link>
+            <Form className="d-flex ms-4" onSubmit={(e) => getSearchedJobs(e)}>
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="mr-2"
+                aria-label="Search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <Button type="submit" variant="outline-success">
+                Search
+              </Button>
+            </Form>
           </Nav>
-          <Form className="d-flex" onSubmit={(e) => getSearchedJobs(e)}>
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="mr-2"
-              aria-label="Search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <Button type="submit" variant="outline-success">
-              Search
-            </Button>
-          </Form>
+          <Button>
+            <BsStarFill />
+            <span className="ms-2">0</span>
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
