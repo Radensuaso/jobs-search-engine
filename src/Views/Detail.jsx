@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { getSingleJob } from "../tools/axiosTools";
 import Loading from "../components/helpers/Loading";
@@ -15,13 +14,10 @@ const Detail = ({ match }) => {
       .then((j) => setJob(j.data[0]))
       .then(() => setLoading(false))
       .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <Container className="mt-5">
-      {loading ? <Loading /> : <JobDetails job={job} />}
-    </Container>
-  );
+  return <>{loading ? <Loading /> : <JobDetails job={job} />}</>;
 };
 
 export default Detail;

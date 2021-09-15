@@ -2,8 +2,8 @@ import { Markup } from "interweave";
 import { Row, Col } from "react-bootstrap";
 
 const JobDetails = ({ job }) => (
-  <Row className="justify-content-center">
-    <Col xs={12} md={10} lg={8} className="d-flex flex-column">
+  <Row>
+    <Col xs={12}>
       <h2 className="mb-5">Title: {job?.title}</h2>
       <h4>Company name</h4>
       <p>{job.company_name}</p>

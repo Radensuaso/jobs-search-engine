@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavbarTop from "./components/navsAndFooters/NavbarTop";
 import Home from "./views/Home";
 import Detail from "./views/Detail";
+import Favorites from "./views/Favorites";
+import { Container } from "react-bootstrap";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -36,18 +38,21 @@ function App() {
           setQuery={setQuery}
           getSearchedJobs={getSearchedJobs}
         />
-        <Route
-          path="/"
-          exact
-          render={(routerProps) => (
-            <Home {...routerProps} jobs={jobs} loading={loading} />
-          )}
-        />
-        <Route
-          path="/Detail/:jobId"
-          exact
-          render={(routerProps) => <Detail {...routerProps} />}
-        />
+        <Container className="mt-5">
+          <Route
+            path="/"
+            exact
+            render={(routerProps) => (
+              <Home {...routerProps} jobs={jobs} loading={loading} />
+            )}
+          />
+          <Route path="/Favorites" exact component={Favorites} />
+          <Route
+            path="/Detail/:jobId"
+            exact
+            render={(routerProps) => <Detail {...routerProps} />}
+          />
+        </Container>
       </Router>
     </div>
   );
