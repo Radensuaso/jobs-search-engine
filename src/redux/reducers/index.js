@@ -23,11 +23,9 @@ export const mainReducer = (state = initialState, action) => {
         ...state,
         favorites: {
           ...state.favorites,
-          list: [
-            ...state.favorites.list.filter(
-              (fl) => fl._id !== action.payload._id
-            ),
-          ],
+          list: state.favorites.list.filter(
+            (fl) => fl._id !== action.payload._id
+          ),
         },
       };
     }
