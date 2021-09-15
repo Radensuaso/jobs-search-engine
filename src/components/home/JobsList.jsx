@@ -41,20 +41,15 @@ const JobsList = ({ jobs, addToFav, removeFromFav, favList }) => {
             <th>{job.category}</th>
             <th>{job.publication_date}</th>
             <th>
-              <Button
-                variant={
-                  favList.some((fl) => fl._id === job._id)
-                    ? "success"
-                    : "primary"
-                }
-                onClick={
-                  favList.some((fl) => fl._id === job._id)
-                    ? () => removeFromFav(job)
-                    : () => addToFav(job)
-                }
-              >
-                <BsStarFill />
-              </Button>
+              {favList.some((fl) => fl._id === job._id) ? (
+                <Button variant="success" onClick={() => removeFromFav(job)}>
+                  <BsStarFill />
+                </Button>
+              ) : (
+                <Button variant="secondary" onClick={() => addToFav(job)}>
+                  <BsStarFill />
+                </Button>
+              )}
             </th>
           </tr>
         ))}

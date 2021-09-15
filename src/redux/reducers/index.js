@@ -1,5 +1,5 @@
 export const ADD_TO_FAV = "ADD_TO_FAV";
-export const REMOVE_FROM_FAV = "ADD_TO_FAV";
+export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
 
 export const initialState = {
   favorites: {
@@ -24,8 +24,9 @@ export const mainReducer = (state = initialState, action) => {
         favorites: {
           ...state.favorites,
           list: [
-            ...state.favorites.list,
-            state.favorites.list.filter((fl) => fl._id !== action.payload._id),
+            ...state.favorites.list.filter(
+              (fl) => fl._id !== action.payload._id
+            ),
           ],
         },
       };
