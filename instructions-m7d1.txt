@@ -1,0 +1,41 @@
+Jobs Search Engine
+You are in charge of building a "Search Engine" for Remote Jobs.
+
+The application should have a search page where the user can input the desired position and retrieve relevant results.
+
+ 
+
+From the results, every company name should be clickable and redirect to a /company-detail the page where all the jobs from that company are listed.
+
+ 
+
+ 
+
+
+Examples
+https://strive-jobs-api.herokuapp.com/jobs?search=developer
+
+ 
+
+https://strive-jobs-api.herokuapp.com/jobs?limit=10&skip=10 
+
+ 
+
+https://strive-jobs-api.herokuapp.com/jobs?title=developer
+
+ 
+
+https://strive-jobs-api.herokuapp.com/jobs?category=writing
+
+ 
+
+https://strive-jobs-api.herokuapp.com/jobs?company=olla
+
+ 
+
+ 
+
+Features
+Home page with search-bar for jobs
+Company detail page with their results only
+EXTRA: implement also a filter by category; valid categories can be retrieved performing a GET request on this endpoint: https://strive-jobs-api.herokuapp.com/jobs/categories

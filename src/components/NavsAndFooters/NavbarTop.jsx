@@ -7,6 +7,7 @@ import {
   Button,
   Container,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const NavbarTop = (props) => {
   const { query, setQuery, getSearchedJobs } = props;
@@ -18,7 +19,9 @@ const NavbarTop = (props) => {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="justify-content-between">
           <Nav className="mr-auto my-2 my-lg-0" navbarScroll>
-            <Nav.Link href="#action1">Home</Nav.Link>
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
           </Nav>
           <Form className="d-flex" onSubmit={(e) => getSearchedJobs(e)}>
             <FormControl
