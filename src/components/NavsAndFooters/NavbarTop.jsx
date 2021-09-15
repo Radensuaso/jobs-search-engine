@@ -9,8 +9,13 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
+import { connect } from "react-redux";
 
-const NavbarTop = ({ query, setQuery, getSearchedJobs }) => {
+const mapStateToProps = (state) => ({
+  favLength: state.favorites.list.length,
+});
+
+const NavbarTop = ({ query, setQuery, getSearchedJobs, favLength }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -37,7 +42,7 @@ const NavbarTop = ({ query, setQuery, getSearchedJobs }) => {
           </Nav>
           <Button>
             <BsStarFill />
-            <span className="ms-2">0</span>
+            <span className="ms-2">{favLength}</span>
           </Button>
         </Navbar.Collapse>
       </Container>
@@ -45,4 +50,4 @@ const NavbarTop = ({ query, setQuery, getSearchedJobs }) => {
   );
 };
 
-export default withRouter(NavbarTop);
+export default connect(mapStateToProps)(withRouter(NavbarTop));

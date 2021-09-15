@@ -1,8 +1,19 @@
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
+import { connect } from "react-redux";
+import { addToFavAction, removeFromFavAction } from "../../redux/actions";
 
-const JobsList = ({ jobs }) => {
+const mapStateToProps = (state) => ({
+  favList: state.favorites.list,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addToFav: (job) => dispatch(addToFavAction(job)),
+  removeFromFav: (job) => dispatch(removeFromFavAction(job)),
+});
+
+const JobsList = ({ jobs, addToFav, removeFromFav, favList }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -30,7 +41,18 @@ const JobsList = ({ jobs }) => {
             <th>{job.category}</th>
             <th>{job.publication_date}</th>
             <th>
-              <Button>
+              <Button
+                variant={
+                  favList.some((fl) => fl._id === job._id)
+                    ? "success"
+                    : "primary"
+                }
+                onClick={
+                  favList.some((fl) => fl._id === job._id)
+                    ? () => removeFromFav(job)
+                    : () => addToFav(job)
+                }
+              >
                 <BsStarFill />
               </Button>
             </th>
@@ -41,4 +63,4 @@ const JobsList = ({ jobs }) => {
   );
 };
 
-export default JobsList;
+export default connect(mapStateToProps, mapDispatchToProps)(JobsList);

@@ -1,20 +1,37 @@
-import { initialState } from "../store";
+export const ADD_TO_FAV = "ADD_TO_FAV";
+export const REMOVE_FROM_FAV = "ADD_TO_FAV";
 
-const ADD_TO_FAV = "ADD_TO_FAV";
-const REMOVE_FROM_FAV = "ADD_TO_FAV";
+export const initialState = {
+  favorites: {
+    list: [],
+  },
+};
 
-const mainReducer = (state = initialState, action) => {
+export const mainReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_FAV: {
-      return "something";
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          list: [...state.favorites.list, action.payload],
+        },
+      };
     }
     case REMOVE_FROM_FAV: {
-      return "something";
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          list: [
+            ...state.favorites.list,
+            state.favorites.list.filter((fl) => fl._id !== action.payload._id),
+          ],
+        },
+      };
     }
 
     default:
       return state;
   }
 };
-
-export default mainReducer;
