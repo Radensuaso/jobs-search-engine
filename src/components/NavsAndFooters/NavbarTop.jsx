@@ -11,10 +11,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchJobs: (query) => dispatch(fetchJobsAction(query)),
+  fetchJobs: (query, pathname, push) => {
+    if (pathname !== "/") {
+      push("/");
+    }
+    dispatch(fetchJobsAction(query));
+  },
 });
 
-const NavbarTop = ({ favoritesList, fetchJobs }) => {
+const NavbarTop = ({ favoritesList, fetchJobs, location, history }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -33,7 +38,9 @@ const NavbarTop = ({ favoritesList, fetchJobs }) => {
                 placeholder="Search"
                 className="mr-2"
                 aria-label="Search"
-                onChange={(e) => fetchJobs(e.target.value)}
+                onChange={(e) =>
+                  fetchJobs(e.target.value, location.pathname, history.push)
+                }
               />
             </Form>
           </Nav>
