@@ -1,7 +1,6 @@
 import initialState from "../initialState.js";
 
-export const ADD_TO_FAV = "ADD_TO_FAV";
-export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
+import { ADD_TO_FAV, REMOVE_FROM_FAV } from "../actions/index.js";
 
 const favoritesReducer = (state = initialState.favorites, action) => {
   switch (action.type) {

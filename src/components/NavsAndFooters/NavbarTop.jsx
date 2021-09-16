@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
 import { connect } from "react-redux";
 import { MdWork } from "react-icons/md";
+import { useState } from "react";
 
 const mapStateToProps = (state) => ({
   favoritesList: state.favorites.favoritesList,
 });
 
-const NavbarTop = ({ query, setQuery, getSearchedJobs, favoritesList }) => {
+const NavbarTop = ({ favoritesList }) => {
+  const [query, setQuery] = useState("");
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -22,7 +24,7 @@ const NavbarTop = ({ query, setQuery, getSearchedJobs, favoritesList }) => {
             <Link to="/" className="nav-link">
               Home
             </Link>
-            <Form className="d-flex ms-4" onSubmit={(e) => getSearchedJobs(e)}>
+            <Form className="d-flex ms-4">
               <FormControl
                 type="search"
                 placeholder="Search"
