@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
 import { connect } from "react-redux";
 import { MdWork } from "react-icons/md";
-import { useState } from "react";
+import { fetchJobsAction } from "../../redux/actions";
 
 const mapStateToProps = (state) => ({
   favoritesList: state.favorites.favoritesList,
 });
 
-const NavbarTop = ({ favoritesList }) => {
-  const [query, setQuery] = useState("");
+const mapDispatchToProps = (dispatch) => ({
+  fetchJobs: (query) => dispatch(fetchJobsAction(query)),
+});
+
+const NavbarTop = ({ favoritesList, fetchJobs }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -30,8 +33,7 @@ const NavbarTop = ({ favoritesList }) => {
                 placeholder="Search"
                 className="mr-2"
                 aria-label="Search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => fetchJobs(e.target.value)}
               />
             </Form>
           </Nav>
@@ -45,4 +47,7 @@ const NavbarTop = ({ favoritesList }) => {
   );
 };
 
-export default connect(mapStateToProps)(withRouter(NavbarTop));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(NavbarTop));

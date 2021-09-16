@@ -38,10 +38,10 @@ const JobsList = ({
   }, []);
   return (
     <>
-      <h2 className="mb-5">
-        {loading ? <Loading /> : `${jobsList && jobsList.length} jobs Found.`}
-      </h2>
-      {error ? (
+      <h2 className="mb-5">{`${jobsList && jobsList.length} jobs Found.`}</h2>
+      {loading ? (
+        <Loading />
+      ) : error ? (
         <Alert variant="danger">Something went Wrong!</Alert>
       ) : (
         <Table striped bordered hover>

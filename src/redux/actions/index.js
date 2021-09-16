@@ -15,7 +15,7 @@ export const fetchJobsAction = (query) => {
       });
 
       const response = await axios.get(
-        `${process.env.REACT_APP_BE_URL}?limit=100&${query}`
+        `${process.env.REACT_APP_BE_URL}?limit=100&search=${query ? query : ""}`
       );
       if (response.status === 200) {
         const jobs = response.data.data;
