@@ -4,30 +4,32 @@ import { Link } from "react-router-dom";
 import { BsTrashFill } from "react-icons/bs";
 import { removeFromFavAction } from "../../redux/actions";
 
-const mapStateToProps = (state) => ({ favList: state.favorites.list });
+const mapStateToProps = (state) => ({
+  favoritesList: state.favorites.favoritesList,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   removeFromFav: (job) => dispatch(removeFromFavAction(job)),
 });
 
-const FavoritesList = ({ favList, removeFromFav }) => {
+const FavoritesList = ({ favoritesList, removeFromFav }) => {
   return (
     <Row className="mt-4">
-      {favList.map((fav) => (
-        <Col key={fav._id} xm={12} md={4} lg={3} className="mb-4">
+      {favoritesList.map((job) => (
+        <Col key={job._id} xm={12} md={4} lg={3} className="mb-4">
           <Card style={{ minHeight: "20rem" }}>
             <Card.Body className="d-flex flex-column justify-content-between">
-              <Card.Title>{fav.title}</Card.Title>
+              <Card.Title>{job.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                {fav.company_name}
+                {job.company_name}
               </Card.Subtitle>
               <Card.Text>
-                <span>{fav.job_type}</span> <br />
-                <span>{fav.category}</span> <br />
-                <span>{fav.publication_date}</span>
+                <span>{job.job_type}</span> <br />
+                <span>{job.category}</span> <br />
+                <span>{job.publication_date}</span>
               </Card.Text>
-              <Link to={`/Detail/${fav._id}`}>Details</Link>
-              <Button variant="danger" onClick={() => removeFromFav(fav)}>
+              <Link to={`/Detail/${job._id}`}>Details</Link>
+              <Button variant="danger" onClick={() => removeFromFav(job)}>
                 <BsTrashFill />
               </Button>
             </Card.Body>

@@ -1,8 +1,13 @@
-import { createStore } from "redux";
-import { mainReducer, initialState } from "../reducers";
+import { createStore, combineReducers } from "redux";
+import favoritesReducer from "../reducers/favoritesReducer.js";
+import initialState from "../initialState.js";
+
+const reducers = combineReducers({
+  favorites: favoritesReducer,
+});
 
 const configureStore = createStore(
-  mainReducer,
+  reducers,
   initialState,
   process.env.REACT_APP_DEVELOPMENT && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

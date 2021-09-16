@@ -6,10 +6,10 @@ import { connect } from "react-redux";
 import { MdWork } from "react-icons/md";
 
 const mapStateToProps = (state) => ({
-  favLength: state.favorites.list.length,
+  favoritesList: state.favorites.favoritesList,
 });
 
-const NavbarTop = ({ query, setQuery, getSearchedJobs, favLength }) => {
+const NavbarTop = ({ query, setQuery, getSearchedJobs, favoritesList }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -35,7 +35,7 @@ const NavbarTop = ({ query, setQuery, getSearchedJobs, favLength }) => {
           </Nav>
           <Link className="btn btn-primary" to="/Favorites">
             <BsStarFill />
-            <span className="ms-2">{favLength}</span>
+            <span className="ms-2">{favoritesList.length}</span>
           </Link>
         </Navbar.Collapse>
       </Container>

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { addToFavAction, removeFromFavAction } from "../../redux/actions";
 
 const mapStateToProps = (state) => ({
-  favList: state.favorites.list,
+  favoritesList: state.favorites.favoritesList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   removeFromFav: (job) => dispatch(removeFromFavAction(job)),
 });
 
-const JobsList = ({ jobs, addToFav, removeFromFav, favList }) => {
+const JobsList = ({ jobs, addToFav, removeFromFav, favoritesList }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -41,7 +41,7 @@ const JobsList = ({ jobs, addToFav, removeFromFav, favList }) => {
             <th>{job.category}</th>
             <th>{job.publication_date}</th>
             <th>
-              {favList.includes(job) ? (
+              {favoritesList.includes(job) ? (
                 <Button variant="success" onClick={() => removeFromFav(job)}>
                   <BsStarFill />
                 </Button>

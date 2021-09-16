@@ -1,4 +1,4 @@
-import { ADD_TO_FAV, REMOVE_FROM_FAV } from "../reducers";
+import { ADD_TO_FAV, REMOVE_FROM_FAV } from "../reducers/favoritesReducer";
 
 export const addToFavAction = (job) => ({
   type: ADD_TO_FAV,
