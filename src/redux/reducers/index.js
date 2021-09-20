@@ -1,10 +1,24 @@
 import { combineReducers } from "redux";
 import favoritesReducer from "./favoritesReducer";
 import jobsReducer from "./jobsReducer";
+import { persistReducer } from "redux-persist";
+import { encryptTransform } from "redux-persist-transform-encrypt";
+import storage from "redux-persist/lib/storage";
 
-const reducers = combineReducers({
+const persistConfig = {
+  key: "root",
+  storage,
+  transforms: [
+    encryptTransform({
+      secretKey: process.env.REACT_APP_ENCRYPTED_PERSIST_KEY,
+    }),
+  ],
+};
+const reducer = combineReducers({
   favorites: favoritesReducer,
   jobs: jobsReducer,
 });
 
-export default reducers;
+const persistingReducer = persistReducer(persistConfig, reducer);
+
+export default persistingReducer;

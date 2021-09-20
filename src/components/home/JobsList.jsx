@@ -70,7 +70,7 @@ const JobsList = ({
                 <th>{job.category}</th>
                 <th>{job.publication_date}</th>
                 <th>
-                  {favoritesList.includes(job) ? (
+                  {favoritesList.some((f) => f._id === job._id) ? (
                     <Button
                       variant="success"
                       onClick={() => removeFromFav(job)}
