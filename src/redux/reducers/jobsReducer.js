@@ -8,7 +8,7 @@ const jobsReducer = (state = initialState.jobs, action) => {
     case LOADING:
       return { ...state, loading: action.payload };
     case ERROR:
-      return { ...state, loading: action.payload };
+      return { ...state, error: action.payload };
     default:
       return state;
   }
