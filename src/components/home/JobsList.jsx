@@ -1,7 +1,6 @@
 import { Table, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
-import { connect } from "react-redux";
 import {
   addToFavAction,
   fetchJobsAction,
@@ -9,7 +8,9 @@ import {
 } from "../../redux/actions";
 import Loading from "../helpers/Loading";
 import { useEffect } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+// import { connect } from "react-redux";
+/* 
 const mapStateToProps = (state) => ({
   favoritesList: state.favorites.favoritesList,
   jobsList: state.jobs.jobsList,
@@ -21,19 +22,18 @@ const mapDispatchToProps = (dispatch) => ({
   addToFav: (job) => dispatch(addToFavAction(job)),
   removeFromFav: (job) => dispatch(removeFromFavAction(job)),
   fetchJobs: () => dispatch(fetchJobsAction()),
-});
+}); */
 
-const JobsList = ({
-  loading,
-  error,
-  jobsList,
-  addToFav,
-  removeFromFav,
-  favoritesList,
-  fetchJobs,
-}) => {
+const JobsList = () => {
+  const favoritesList = useSelector((state) => state.favorites.favoritesList);
+  const jobsList = useSelector((state) => state.jobs.jobsList);
+  const loading = useSelector((state) => state.jobs.loading);
+  const error = useSelector((state) => state.jobs.error);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchJobs();
+    dispatch(fetchJobsAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -73,12 +73,15 @@ const JobsList = ({
                   {favoritesList.some((f) => f._id === job._id) ? (
                     <Button
                       variant="success"
-                      onClick={() => removeFromFav(job)}
+                      onClick={() => dispatch(removeFromFavAction(job))}
                     >
                       <BsStarFill />
                     </Button>
                   ) : (
-                    <Button variant="secondary" onClick={() => addToFav(job)}>
+                    <Button
+                      variant="secondary"
+                      onClick={() => dispatch(addToFavAction(job))}
+                    >
                       <BsStarFill />
                     </Button>
                   )}
@@ -92,4 +95,4 @@ const JobsList = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobsList);
+export default JobsList;

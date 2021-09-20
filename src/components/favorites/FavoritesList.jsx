@@ -1,18 +1,22 @@
 import { Row, Col, Card, Button } from "react-bootstrap";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsTrashFill } from "react-icons/bs";
 import { removeFromFavAction } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+// import { connect } from "react-redux";
 
-const mapStateToProps = (state) => ({
+/* const mapStateToProps = (state) => ({
   favoritesList: state.favorites.favoritesList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   removeFromFav: (job) => dispatch(removeFromFavAction(job)),
-});
+}); */
 
-const FavoritesList = ({ favoritesList, removeFromFav }) => {
+const FavoritesList = () => {
+  const favoritesList = useSelector((state) => state.favorites.favoritesList);
+  const dispatch = useDispatch();
+
   return (
     <Row className="mt-4">
       {favoritesList.map((job) => (
@@ -29,7 +33,10 @@ const FavoritesList = ({ favoritesList, removeFromFav }) => {
                 <span>{job.publication_date}</span>
               </Card.Text>
               <Link to={`/Detail/${job._id}`}>Details</Link>
-              <Button variant="danger" onClick={() => removeFromFav(job)}>
+              <Button
+                variant="danger"
+                onClick={() => dispatch(removeFromFavAction(job))}
+              >
                 <BsTrashFill />
               </Button>
             </Card.Body>
@@ -40,4 +47,4 @@ const FavoritesList = ({ favoritesList, removeFromFav }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesList);
+export default FavoritesList;
